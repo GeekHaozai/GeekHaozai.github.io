@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>正则表达式</title>
+      <link href="/2023/04/26/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+      <url>/2023/04/26/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><table><thead><tr><th align="center">特殊字符</th><th align="center">描述</th></tr></thead><tbody><tr><td align="center">.</td><td align="center">匹配除了“\n”之外的任意单个字符。要匹配包括“\n”在内的任意字符，使用”[.\n]”</td></tr><tr><td align="center">\d</td><td align="center">匹配一个数字字符，等价于[0-9]</td></tr><tr><td align="center">\D</td><td align="center">匹配一个非数字字符，等价于[^0-9]</td></tr><tr><td align="center">\s</td><td align="center">匹配任意空白字符，包括空格、制表符、换页符等，等价于[\f\n\r\t\v]</td></tr><tr><td align="center">\S</td><td align="center">匹配任意非空白字符，等价于[^\f\n\r\t\v]</td></tr><tr><td align="center">\w</td><td align="center">匹配包括下划线的任意单词字符，等价于[A-Za-z0-9_]</td></tr><tr><td align="center">\W</td><td align="center">匹配任意非单词字符，等价于[^A-Za-z0-9_]</td></tr></tbody></table><blockquote><p>在正则表达式中，要匹配可变长度的字符：</p><ul><li>用*表示任意个数的字符（包括0）</li><li>用+表示至少一个字符</li><li>用？表示0或者一个字符</li><li>用{ }表示可以出现的次数</li></ul><p>例如：</p><p>\d{3}\s+\d{3,8}就匹配电话号码</p></blockquote><p>如果要匹配像010-123456这样的，要使用转义字符</p><blockquote><p>以下是需要进行转义的特殊字符的比较完整的列表：</p><ol><li><code>.</code> （点号）：表示匹配任意单个字符，需要使用 <code>\.</code> 来匹配字面上的点号。</li><li><code>*</code> （星号）：表示匹配前一个字符零次或多次，需要使用 <code>\*</code> 来匹配字面上的星号。</li><li><code>+</code> （加号）：表示匹配前一个字符一次或多次，需要使用 <code>\+</code> 来匹配字面上的加号。</li><li><code>?</code> （问号）：表示匹配前一个字符零次或一次，需要使用 <code>\?</code> 来匹配字面上的问号。</li><li><code>{</code> 和 <code>}</code> （左花括号和右花括号）：表示限定匹配次数的范围，例如 <code>{n}</code> 表示匹配前一个字符恰好 n 次，需要使用 <code>\{</code> 和 <code>\}</code> 来匹配字面上的花括号。</li><li><code>|</code> （竖线）：表示逻辑或（或者），需要使用 <code>\|</code> 来匹配字面上的竖线。</li><li><code>[</code> 和 <code>]</code> （左方括号和右方括号）：表示字符范围，例如 <code>[a-z]</code> 表示匹配小写字母 a 到 z 中的任意一个字符，需要使用 <code>\[</code> 和 <code>\]</code> 来匹配字面上的方括号。</li><li><code>(</code> 和 <code>)</code> （左括号和右括号）：用于分组和捕获匹配，需要使用 <code>\(</code> 和 <code>\)</code> 来匹配字面上的括号。</li><li><code>{</code> 和 <code>}</code> （左大括号和右大括号）：用于表示量词或者限定符的特定重复次数，例如 <code>{n}</code> 表示匹配前一个字符恰好 n 次，需要使用 <code>\{</code> 和 <code>\}</code> 来匹配字面上的大括号。</li><li><code>\</code> （反斜杠）：用于转义特殊字符，例如 <code>\.</code>, <code>\*</code>, <code>\[</code> 等，需要使用 <code>\\</code> 来匹配字面上的反斜杠。</li><li><code>-</code> （减号）：用于表示字符范围，需要使用 <code>\-</code> 来匹配字面上的减号。</li><li>但在某些正则表达式引擎中，下划线可能被视为特殊字符，因此为了避免可能的歧义，可以将其转义为 <code>\_</code></li></ol></blockquote><p>其它：</p><ul><li>|表示或运算，例如：（ab）|（cd）</li><li>^匹配行首</li><li>$匹配行尾</li><li>&lt;.+&gt;默认贪婪匹配</li><li>&lt;.+?&gt;懒惰匹配</li></ul><h2 id="Python中的正则表达式"><a href="#Python中的正则表达式" class="headerlink" title="Python中的正则表达式"></a>Python中的正则表达式</h2><p>re.match</p><blockquote><p><code>re.match()</code>函数返回一个<code>match</code>对象，如果正则表达式在字符串的开头匹配成功；如果匹配失败，则返回<code>None</code>。</p><p><code>match</code>对象是一个包含匹配结果的对象，它具有以下方法可以用于获取匹配到的信息：</p><ul><li><code>group()</code>: 返回匹配到的内容，可以传入一个可选的参数表示要获取的子组序号，默认为0，表示整个匹配到的字符串。</li><li><code>start()</code>: 返回匹配到的子串在原字符串中的起始位置的索引。</li><li><code>end()</code>: 返回匹配到的子串在原字符串中的结束位置的索引。</li><li><code>span()</code>: 返回一个包含匹配到的子串在原字符串中起始位置和结束位置索引的元组。</li></ul><p>以下是一个示例，展示如何使用<code>match</code>对象获取匹配到的信息：</p></blockquote><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> re<span class="token comment" spellcheck="true"># 定义一个正则表达式模式</span>pattern <span class="token operator">=</span> r<span class="token string">'hello'</span><span class="token comment" spellcheck="true"># 要进行匹配的字符串</span>string <span class="token operator">=</span> <span class="token string">'hello world'</span><span class="token comment" spellcheck="true"># 进行正则表达式匹配</span>match_obj <span class="token operator">=</span> re<span class="token punctuation">.</span>match<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> string<span class="token punctuation">)</span><span class="token comment" spellcheck="true"># 判断匹配结果</span><span class="token keyword">if</span> match_obj<span class="token punctuation">:</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'匹配成功！'</span><span class="token punctuation">)</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'匹配到的内容：'</span><span class="token punctuation">,</span> match_obj<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'匹配到的内容起始位置：'</span><span class="token punctuation">,</span> match_obj<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'匹配到的内容结束位置：'</span><span class="token punctuation">,</span> match_obj<span class="token punctuation">.</span>end<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'匹配到的内容起始和结束位置：'</span><span class="token punctuation">,</span> match_obj<span class="token punctuation">.</span>span<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token keyword">else</span><span class="token punctuation">:</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'匹配失败！'</span><span class="token punctuation">)</span></code></pre><p>re.search</p><blockquote><p><code>re.search()</code>函数的使用方式如下：</p><pre class=" language-python"><code class="language-python">re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> string<span class="token punctuation">,</span> flags<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span></code></pre><p>其中，<code>pattern</code>是正则表达式模式，用于匹配字符串；<code>string</code>是待匹配的字符串；<code>flags</code>是可选参数，用于指定正则表达式的匹配标志。</p><p>以下是<code>re.search()</code>函数的参数说明：</p><ul><li><p><code>pattern</code>：正则表达式模式，用于指定需要匹配的字符串的规则。可以是字符串形式的正则表达式，也可以是由<code>re.compile()</code>函数编译得到的正则表达式对象。</p></li><li><p><code>string</code>：待匹配的字符串。</p></li><li><p><code>flags</code>  ：可选参数，用于指定正则表达式的匹配标志。常用的标志包括：</p><ul><li><code>re.IGNORECASE</code>：忽略大小写匹配。</li><li><code>re.MULTILINE</code>：多行模式匹配。</li><li><code>re.DOTALL</code>：允许 <code>.</code> 匹配换行符。</li><li><code>re.UNICODE</code>：启用 Unicode 匹配。</li><li><code>re.VERBOSE</code>：忽略正则表达式中的空白字符和注释。</li></ul></li></ul><p><code>re.search()</code>函数的返回值是一个<code>re.Match</code>对象，表示第一个匹配的结果。<code>re.Match</code>对象具有一系列方法和属性，可以用于获取匹配结果的具体信息，如匹配的字符串、匹配的位置、匹配的分组等。</p><p>以下是一个简单的示例，演示了如何使用<code>re.search()</code>函数进行正则表达式匹配：</p><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> re<span class="token comment" spellcheck="true"># 定义正则表达式模式</span>pattern <span class="token operator">=</span> r<span class="token string">'hello'</span><span class="token comment" spellcheck="true"># 待匹配的字符串</span>string <span class="token operator">=</span> <span class="token string">'hello world!'</span><span class="token comment" spellcheck="true"># 使用re.search()函数进行匹配</span>match <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> string<span class="token punctuation">)</span><span class="token comment" spellcheck="true"># 判断是否匹配成功</span><span class="token keyword">if</span> match<span class="token punctuation">:</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'匹配成功！'</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true"># 获取匹配的结果</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'匹配的字符串：'</span><span class="token punctuation">,</span> match<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'匹配的位置：'</span><span class="token punctuation">,</span> match<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'-'</span><span class="token punctuation">,</span> match<span class="token punctuation">.</span>end<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token keyword">else</span><span class="token punctuation">:</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'匹配失败！'</span><span class="token punctuation">)</span></code></pre></blockquote><p>(题外话：“：=”</p><blockquote><p>在 Python 中，”:=” 是一个可变表达式的赋值语法，也被称为 “walrus operator”（海象运算符）。它的引入是为了在表达式中进行赋值操作，以简化代码并增加可读性。</p><p>使用 “:=” 运算符，可以在一行中同时进行变量赋值和条件判断，例如在 while 循环中使用：</p><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 示例：使用 ":=" 在 while 循环中进行赋值和条件判断</span><span class="token keyword">while</span> <span class="token punctuation">(</span>line <span class="token punctuation">:</span><span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token string">"quit"</span><span class="token punctuation">:</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"输入的内容是:"</span><span class="token punctuation">,</span> line<span class="token punctuation">)</span></code></pre></blockquote><p> )</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Python </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> 爬虫 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Python复习（一）</title>
+      <link href="/2023/04/24/Python%E5%87%BD%E6%95%B0/"/>
+      <url>/2023/04/24/Python%E5%87%BD%E6%95%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Python函数"><a href="#1-Python函数" class="headerlink" title="1.Python函数"></a>1.Python函数</h1><h3 id="A-1数学函数"><a href="#A-1数学函数" class="headerlink" title="A.1数学函数"></a>A.1数学函数</h3><table><thead><tr><th>函数</th><th>返回值（描述）</th></tr></thead><tbody><tr><td>abs(x)</td><td>返回数字绝对值</td></tr><tr><td>ceil(x)</td><td>返回数字的上入整数</td></tr><tr><td>cmp(x)</td><td>如果x&lt;y就返回-1，如果x==y返回0，如果x&gt;y返回1</td></tr><tr><td>exp(x)</td><td>返回$e^x$</td></tr><tr><td>fabs(x)</td><td>返回数字的绝对值</td></tr><tr><td>floor(x)</td><td>返回数字的下舍整数</td></tr><tr><td>log(x)</td><td>输入一个参数是lnx，输入两个参数是$\log_{second}{first}$,而且是精度为2？</td></tr><tr><td>log10（x）</td><td>返回以10为基数的对数</td></tr><tr><td>max($x_1,x_2…$)</td><td>返回最大值，参数可以为序列</td></tr><tr><td>min($x_1,x_2…$)</td><td>返回最小值，参数可以为序列</td></tr><tr><td>modf(x)</td><td>返回x的整数部分与小数部分，两部分的数值与x相同，整数部分以浮点型表示</td></tr><tr><td>round(x,[n])</td><td>返回浮点数x的四舍五入值，如果给出n值，代表四舍五入到小数点后的位数</td></tr><tr><td>sqrt(x)</td><td>返回数字的平方根，数字可以为负数，返回类型为实数</td></tr><tr><td>pow(x,y)</td><td>$x^y$</td></tr></tbody></table><h3 id="A-2随机函数"><a href="#A-2随机函数" class="headerlink" title="A.2随机函数"></a>A.2随机函数</h3>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C#重操旧业（四）</title>
+      <link href="/2023/04/17/%E9%87%8D%E6%93%8D%E6%97%A7%E4%B8%9A%EF%BC%88%E5%9B%9B%EF%BC%89/"/>
+      <url>/2023/04/17/%E9%87%8D%E6%93%8D%E6%97%A7%E4%B8%9A%EF%BC%88%E5%9B%9B%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h1 id="类型、存储和变量"><a href="#类型、存储和变量" class="headerlink" title="类型、存储和变量"></a>类型、存储和变量</h1><h3 id="1-预定义类型"><a href="#1-预定义类型" class="headerlink" title="1.预定义类型"></a>1.预定义类型</h3><p>C#中有16种预定义类型。3种非简单类型，13种简单类型。它们都是预定义数据类型。非简单类型有object，string，dynamic。简单类型有非数值类型和数值类型，非数值类型有bool和char，数值类型有浮点型和整型，浮点型有decimal（小数类型），float，double。整型有byte，sbyte，short，ushort，long，ulong，int，uint。</p><p>object是左右类的基类，string是Unicode字符数组，dynamic动态语言写的程序集使用。</p><blockquote><p>简单数据类型和.NET底层类之间有一一对应关系。所有的简单类型都是有一个底层类对应的。</p><p>sbyte-&gt;System.SByte</p><p>byte-&gt;System.Byte</p><p>short-&gt;System.Int16</p><p>ushort-&gt;System.UInt16</p><p>int-&gt;System.Int32</p><p>uint-&gt;System.UInt32</p><p>long-&gt;System.Int64</p><p>ulong-&gt;System.UInt64</p><p>float-&gt;System.Single</p><p>double-&gt;System.Double</p><p>bool-&gt;System.Boolean</p><p>char-&gt;System.Char</p><p>decimal-&gt;System.Deciaml</p><p>非简单类型和.NET底层类对应的情况</p><p>object-&gt;System.Object</p><p>string-&gt;System.String</p><p>dynamic-&gt;无<br>使用.NET底层的类型名称也符合C#语法，但是不推荐这样做</p></blockquote><h3 id="2-用户自定义类型"><a href="#2-用户自定义类型" class="headerlink" title="2.用户自定义类型"></a>2.用户自定义类型</h3><ul><li>类类型</li><li>结构类型</li><li>数组类型</li><li>枚举类型</li><li>委托类型</li><li>接口类型</li></ul><h3 id="3-变量"><a href="#3-变量" class="headerlink" title="3.变量"></a>3.变量</h3><p>C#提供了4种变量</p><ul><li>局部变量</li></ul><p>​不是类型的成员</p><ul><li>字段</li></ul><p>​是类型的成员</p><ul><li>参数</li><li>数组元素</li></ul><h6 id="变量的自动初始化"><a href="#变量的自动初始化" class="headerlink" title="变量的自动初始化"></a>变量的自动初始化</h6><table><thead><tr><th>变量类型</th><th>存储位置</th><th>自动初始化</th></tr></thead><tbody><tr><td>局部变量</td><td>栈或者栈和堆</td><td>否</td></tr><tr><td>类字段</td><td>堆</td><td>是</td></tr><tr><td>结构字段</td><td>栈或堆</td><td>是</td></tr><tr><td>参数</td><td>栈</td><td>否</td></tr><tr><td>数组元素</td><td>堆</td><td>是</td></tr></tbody></table><h3 id="4-静态类型和dynamic关键字"><a href="#4-静态类型和dynamic关键字" class="headerlink" title="4.静态类型和dynamic关键字"></a>4.静态类型和dynamic关键字</h3><p>​变量的类型在编译的时候确定并且不能在运行时修改的类型是静态类型。</p><p>​不是所有语言都是静态类型的，（像IronPython,IronRuby这样的动态类型)它们也是.NET语言，C#要能引用这些语言编写的程序集，于是设计了dynamic这个关键字，在运行时解析自身。</p><p>​在编译的时候不会对dynamic类型的变量进行类型检查。相反，编译器会将该变量以及该变量的操作相关的所有信息打包。在运行时，会对这些信息检查，以确保它与变量所代表的实际类型一致，否则就抛出异常。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> C#的学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C# </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C#重操旧业（三）</title>
+      <link href="/2023/04/17/%E9%87%8D%E6%93%8D%E6%97%A7%E4%B8%9A%EF%BC%88%E4%B8%89%EF%BC%89/"/>
+      <url>/2023/04/17/%E9%87%8D%E6%93%8D%E6%97%A7%E4%B8%9A%EF%BC%88%E4%B8%89%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h1 id="C-编程概述"><a href="#C-编程概述" class="headerlink" title="C#编程概述"></a>C#编程概述</h1><h3 id="1-关键字"><a href="#1-关键字" class="headerlink" title="1.关键字"></a>1.关键字</h3><p><a href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/" title="C#的官方文档">完整的C#关键字表在这里</a></p><ul><li>关键字除非加上@，否则不能用作变量名或者其它形式的标识符</li><li>类型名是Pascal命名法，但是关键字都是小写</li></ul><h3 id="2-格式化字符串"><a href="#2-格式化字符串" class="headerlink" title="2.格式化字符串"></a>2.格式化字符串</h3><p>可以是这样：</p><pre class=" language-c#"><code class="language-c#">Console.WriteLine("Two sample integers are {0} and {1}.",3,6);</code></pre><p>也可以是这样：（字符串插值）</p><pre class=" language-c#"><code class="language-c#">int s=3;int m=6;Console.WriteLine("Two sample integers are {s} and {m}.")</code></pre><hr><p>注：</p><p>​    标记不能试图引用超出替换值列表长度以外位置的值。如果引用了，不会产生编译错误但是会有运行错误（即异常）</p><hr><h6 id="格式化数字字符串"><a href="#格式化数字字符串" class="headerlink" title="格式化数字字符串"></a>格式化数字字符串</h6><p>即{index,alignment:format}</p><ul><li>alignment（对齐说明符）是可选的，制定字符宽度，以及是否右对齐或者左对齐</li></ul><blockquote><p>它由一个整数或者负整数组成</p><ul><li>整数表示字段或者使用字符的最少数量</li><li>符号中正数表示右对齐，负数表示左对齐</li><li>如果要表示的字符数比对齐说明符中指定的字符数要小，那么其余字符会用空格补齐</li><li>如果多余说明符中指定的字符数，对齐说明符会被忽略</li></ul></blockquote><ul><li>format（格式字段）是指定格式</li></ul><blockquote><ul><li>格式说明符是一个字母字符，是9个内置字符格式之一。字符可以是大写或者小写的形式，大小写对某些说明符来说比较重要，而对另外一些说明符来说不重要。</li><li>精度说明符是可选的，由1~2位数组成，它的实际意义取决于格式说明符</li></ul><p><a href="https://learn.microsoft.com/zh-cn/dotnet/standard/base-types/standard-numeric-format-strings">标准数字格式字符串 | Microsoft Learn官方文档</a><br>自己官方文档还没怎么看。。</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> C#的学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C# </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>分享我怎么免费白嫖Chatgpt、Newbing</title>
+      <link href="/2023/04/10/%E6%83%B3%E7%94%A8Chatgpt%E3%80%81Newbing%EF%BC%9F/"/>
+      <url>/2023/04/10/%E6%83%B3%E7%94%A8Chatgpt%E3%80%81Newbing%EF%BC%9F/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1-梯子安装"><a href="#1-梯子安装" class="headerlink" title="1.梯子安装"></a>1.梯子安装</h3><p>​我一直使用的是“快柠檬”这个梯子（不要误会，这不是什么流氓颜色软件）下载连接的网址放在下面：</p><p>​    <a href="https://knmvb.site/" title="这个是下载网址">快柠檬下载</a></p><p>​有Android、Windows、Mac、IOS版本的，但是Mac、IOS我没使用过，好像有安装限制，那就需要你们自己探索了（指的是无限白嫖），这个软件第一次进去会免费体验2天VIP线路（全天可使用、可以用的节点比较多，节点就是你能够换到哪个国家哪个地区，之所以需要翻墙就是我们国家被限制了需要翻到境外访问），之后可以通过签到获得一定时长和流量（也可能签到赠予你0min时长。。这就是引出后面要讲到的无限白嫖法）。</p><p>​（友情警告：千万不要使用梯子在某些平台发表敏感言论！搞搞学看看油管还行！网上不是法外之地！！！）</p><p>​Windows下安装后你会进入到如图页面：（不能像常规应用一样自由拖拽）</p><p>​<img src="/2023/04/10/%E6%83%B3%E7%94%A8Chatgpt%E3%80%81Newbing%EF%BC%9F/%E7%95%8C%E9%9D%A2.png" alt="界面" title="Windows下的界面"></p><p>​然后下滑有签到界面：</p><p>​    <img src="/2023/04/10/%E6%83%B3%E7%94%A8Chatgpt%E3%80%81Newbing%EF%BC%9F/%E7%AD%BE%E5%88%B0.png" alt="签到" title="Windows下的界面"></p><h4 id="无限白嫖方法"><a href="#无限白嫖方法" class="headerlink" title="无限白嫖方法"></a>无限白嫖方法</h4><p>手机版直接清楚所有数据，然后就会免费再白嫖2天，遗憾的是电脑无法将其清除数据，解决办法就是利用每次清除数据后其实是新建了一个账号供你使用，将这个账号登到电脑上就好了</p><p><img src="/2023/04/10/%E6%83%B3%E7%94%A8Chatgpt%E3%80%81Newbing%EF%BC%9F/%E7%AC%AC%E4%B8%80%E6%AD%A5.jpg" alt="第一步"></p><h2 id="2-分享ChatGPT的账号以及一些利用ChatGPT的api接口实现的不用翻墙的国内站点"><a href="#2-分享ChatGPT的账号以及一些利用ChatGPT的api接口实现的不用翻墙的国内站点" class="headerlink" title="2.分享ChatGPT的账号以及一些利用ChatGPT的api接口实现的不用翻墙的国内站点"></a>2.分享ChatGPT的账号以及一些利用ChatGPT的api接口实现的不用翻墙的国内站点</h2><p><a href="https://chat.openai.com/chat">OpenAI官网的gpt-3</a></p><p>账号：<a href="mailto:sik8725@163.com">sik8725@163.com</a></p><p>密码：qwer1234</p><p>原来有分享很多个账号，但是文档被锁了，忘记备份一份了，现在只保留了三个账号<span class="github-emoji"><span>😢</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>,所以只能分享一个账号，实在是抱歉，自己的账户说不定哪天也没有了。</p><p>现在的官网不升级（20$/mon）基本就会回答完你的一个问题大概10-15s后，如果你没在此期间继续问下去就会断开连接，也就是你再输入问题，它会提示你regenerate，这是正常情况，刷新即可。</p><h3 id="3-New-Bing账号分享"><a href="#3-New-Bing账号分享" class="headerlink" title="3.New Bing账号分享"></a>3.New Bing账号分享</h3><p>微软账号：<a href="mailto:xgzmujrgzk@iubridge.com">xgzmujrgzk@iubridge.com</a></p><p>密码：我的姓名全拼（两个首字母大写）+我的生日月份（2位）+我的生日日份（2位）</p><p>连上梯子打开edge直接搜索，开袋即食</p><p><img src="/2023/04/10/%E6%83%B3%E7%94%A8Chatgpt%E3%80%81Newbing%EF%BC%9F/nb.png" alt="NB"></p><p>（NB底层模型是GPT-4，但是被微软切去了前额叶。。。）</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 神辅 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习Chatgpt 3.5 使用教程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C#重操旧业（二）</title>
+      <link href="/2023/04/10/%E9%87%8D%E6%93%8D%E6%97%A7%E4%B8%9A%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
+      <url>/2023/04/10/%E9%87%8D%E6%93%8D%E6%97%A7%E4%B8%9A%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h1 id="C-和-NET-Core"><a href="#C-和-NET-Core" class="headerlink" title="C#和.NET Core"></a>C#和.NET Core</h1><h3 id="1-什么是-NET-Core"><a href="#1-什么是-NET-Core" class="headerlink" title="1.什么是.NET Core"></a>1.什么是.NET Core</h3><p>​    微软用.NET框架的一个基于云的、跨平台的、开源衍生产品更好解决Web开发以及Linux或者MacOS计算机的开发，这个新框架就是.NET Core。同一时间，微软收购了Xamarin以解决Android和IOS等移动平台的开发问题。</p><h3 id="2-NET-Core的一些特性"><a href="#2-NET-Core的一些特性" class="headerlink" title="2..NET Core的一些特性"></a>2..NET Core的一些特性</h3><ul><li>.NET Core是基于Nuget包进行分发的。<code>包</code>是提供某些功能单元的代码库，.NET Core就是高度模块化的，以便可以独立升级不同的组件，而无须更换整个应用程序。</li><li>占用空间要比.NET Framwork小</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> C#的学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C# </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>link的使用</title>
+      <link href="/2023/04/09/Typora%E7%9A%84%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%88link%EF%BC%89/"/>
+      <url>/2023/04/09/Typora%E7%9A%84%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%88link%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h2 id="第一种跳转：超链接跳转"><a href="#第一种跳转：超链接跳转" class="headerlink" title="第一种跳转：超链接跳转"></a>第一种跳转：超链接跳转</h2><p><a href="https://blog.csdn.net/qq_41907769/article/details/121722716">跳转到这篇文章的原处</a></p><p><a href="https://blog.csdn.net/qq_41907769/article/details/121722716" title="这不是我原创的">跳转到这篇文章的原处</a></p><h2 id="第二种跳转：参考链接"><a href="#第二种跳转：参考链接" class="headerlink" title="第二种跳转：参考链接"></a>第二种跳转：参考链接</h2><p><a href="http://baidu.com/">这是一个参考链接</a></p><p><a href="http://baidu.com/">有了这个引用到处都可以用</a></p><p>[而且可以带上参数][2]</p><p>[][2]</p><p>[2]: <a href="http://4399.com/">http://4399.com</a>“ 这是4399的官网啊”</p><h2 id="第三种跳转：本地文件的跳转"><a href="#第三种跳转：本地文件的跳转" class="headerlink" title="第三种跳转：本地文件的跳转"></a>第三种跳转：本地文件的跳转</h2><blockquote><p>// 跳到当前目录下的Readme1.md文件<br><a href="Readme1.md">Readme1</a></p><p>// 跳到当前目录下的Readme3文件夹<br><a href="Readme3">Readme3</a></p><p>// 相对路径跳到上级目录的某个文件<br><a href="../Docs/Readme2.markdown">Readme2</a></p><p>// 绝对路径跳转到C盘下的某个md文件<br><a href="C:/Develop/Docs/Readme1.md">Readme4</a></p></blockquote><h2 id="第四种跳转"><a href="#第四种跳转" class="headerlink" title="第四种跳转"></a>第四种跳转</h2><blockquote><h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p><a href="#%E6%A0%87%E9%A2%98">点击我，就会跳到该标题处</a><br>注意！！注意！！注意！！ #和文字之间没有空格</p></blockquote><blockquote><h3 id="测试1"><a href="#测试1" class="headerlink" title="测试1"></a>测试1</h3><h3 id="测试1-1"><a href="#测试1-1" class="headerlink" title="测试1"></a>测试1</h3><p><a href="#%E6%B5%8B%E8%AF%951-2">跳到第二个测试1</a></p><p>由此解决标题相同的问题</p></blockquote><h6 id="HTML-a标签跳转"><a href="#HTML-a标签跳转" class="headerlink" title="HTML a标签跳转"></a>HTML a标签跳转</h6><blockquote><p><a id="定义的锚点"></a></p><p>在Typora文档中，说name属性和id属性都行<br><a name="定义的锚点"></a></p></blockquote><p><a href="#定义的锚点">这样会跳转到锚点</a></p><blockquote><p>注意：如果你的文章有目录结构，如果在标题藏锚点，它会直接跳转到目录处，而不是直接跳转到标题处</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Typora的使用技巧 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C#重操旧业（一）</title>
+      <link href="/2023/04/09/%E9%87%8D%E6%93%8D%E6%97%A7%E4%B8%9A%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+      <url>/2023/04/09/%E9%87%8D%E6%93%8D%E6%97%A7%E4%B8%9A%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h1 id="C-和-NET框架（-NET-Framwork）"><a href="#C-和-NET框架（-NET-Framwork）" class="headerlink" title="C#和.NET框架（.NET Framwork）"></a>C#和.NET框架（.NET Framwork）</h1><h3 id="1-Win32-API"><a href="#1-Win32-API" class="headerlink" title="1.Win32 API"></a>1.Win32 API</h3><blockquote><p>Win32 API 是由 Microsoft 使用 C 和汇编语言编写的，这些函数和接口是以 C 语言风格的函数接口形式提供的。在 C 语言中，使用 extern “C” 来声明 C 语言函数接口，以便于其它编程语言可以通过其名称进行调用。这种形式的函数接口也被称为 C 语言调用约定（Calling Convention），Win32 API 中使用的是标准的 C 语言调用约定。</p></blockquote><blockquote><p>使用 Win32 API 就是调用 Windows 操作系统中的 DLL 文件来使用其中的函数和接口。这些 DLL 文件中包含了大量的 Win32 API 函数和接口，应用程序可以通过加载和调用这些 DLL 文件来使用 Win32 API。不过需要注意的是，Win32 API 中的函数和接口有着严格的参数和返回值要求，使用时需要按照其规范进行调用，否则可能会导致应用程序出现错误或异常。</p></blockquote><h3 id="2-MFC（Microsoft-Foundation-Classes，Microsoft-基础类库）"><a href="#2-MFC（Microsoft-Foundation-Classes，Microsoft-基础类库）" class="headerlink" title="2.MFC（Microsoft Foundation Classes，Microsoft 基础类库）"></a>2.MFC（Microsoft Foundation Classes，Microsoft 基础类库）</h3><blockquote><p>MFC 则是在 Win32 API 基础上，使用 C++ 封装了一些常用的 GUI 控件和应用程序框架，提供了一些面向对象的开发接口，使得开发者可以更加方便地使用 Win32 API 来开发 Windows 应用程序。使用 MFC 开发程序时，开发者可以通过封装好的 C++ 类来创建窗口、处理消息、操作文件等等，而无需直接调用 Win32 API。MFC 本质上是对 Win32 API 的一种封装和扩展，因此可以看作是 Win32 API 的一种高级封装。</p></blockquote><blockquote><p>但是只能在 Visual C++ 环境下使用。</p></blockquote><h3 id="3-COM（Component-Object-Model）"><a href="#3-COM（Component-Object-Model）" class="headerlink" title="3.COM（Component Object Model）"></a>3.COM（Component Object Model）</h3><blockquote><p>COM 组件通常是通过 DLL 文件实现的。COM 组件包含一个或多个对象，每个对象都有一个标识符和一组方法。在运行时，应用程序可以通过调用 COM 组件的接口，与其中的对象进行交互，并使用其提供的方法来实现特定的功能。COM 组件的接口是通过虚函数表（VTable）来实现的，这个虚函数表存储了 COM 组件的方法地址和其他相关信息。当应用程序调用 COM 组件的方法时，它实际上是在调用 COM 组件的函数指针，然后由 DLL 文件负责实际执行这些方法。因此，COM 组件的 DLL 文件是实现 COM 组件接口的关键。</p></blockquote><p>(上面这段话暂时还不是很懂)</p><hr><h2 id="比对"><a href="#比对" class="headerlink" title="比对"></a>比对</h2><blockquote><p>COM、MFC 和 Win32 API 都是 Windows 平台下的应用程序开发技术，但它们各自的定位和作用略有不同。</p><p>COM 是一种组件对象模型，用于实现组件之间的互操作性和代码重用，它提供了一种标准的接口和协议，使得不同的软件组件可以通过相同的接口进行交互，从而实现更加灵活和可扩展的应用程序设计。</p><p>MFC（Microsoft Foundation Class）是一个基于 C++ 的类库，它封装了 Win32 API 的许多功能，提供了更加简单易用的编程接口。MFC 主要用于 Windows 平台下的 GUI 应用程序开发，它提供了许多 UI 控件和窗口管理功能，帮助开发人员快速构建 Windows 应用程序。</p><p>Win32 API 是 Windows 操作系统提供的一组函数和接口，它们是操作系统和应用程序之间的接口，可以访问和控制操作系统的各种功能和资源，例如文件、进程、窗口、消息等。Win32 API 的主要作用是提供底层系统编程接口，帮助开发人员编写更加高效和精密的应用程序。</p><p>总的来说，COM 是一种组件技术，MFC 是一种应用程序框架，Win32 API 是一种系统编程接口。它们之间有一些交叉和重叠，但各自的定位和作用还是有所不同的。</p><p>纯Win32 API不是面向对象的；MFC虽然面向对象但是它并不一致，变得陈旧；COM实际代码复杂，丑陋、不雅！</p></blockquote><h2 id="NET-Framwork"><a href="#NET-Framwork" class="headerlink" title=".NET Framwork"></a>.NET Framwork</h2><blockquote><p>主要组成部分：</p><ol><li>CLR（Common Language Runtime）：.NET Framework 的核心组件之一，负责解释和执行 .NET 应用程序的 IL（Intermediate Language）代码，并提供垃圾回收、异常处理、安全性、线程管理等功能。</li><li>FCL（Framework Class Library）：.NET Framework 的类库，提供了许多用于开发 .NET 应用程序的基础类、集合类、IO 类、数据库访问类、网络类、安全类、XML 类、Web 类等。</li><li>ADO.NET：.NET Framework 中用于访问数据库的组件，包括 DataSet、DataAdapter、Connection 等，可以连接多种不同的数据源，如 SQL Server、Oracle、MySQL 等。</li><li>ASP.NET：.NET Framework 中用于开发 Web 应用程序的组件，包括 Web Forms、MVC、Web API 等，提供了一系列易于使用的功能和工具，支持多种 Web 开发模型。</li><li>Windows Forms：.NET Framework 中用于开发桌面应用程序的组件，提供了一套基于 Windows 的用户界面，支持多种控件和布局方式，可以快速创建美观且易于使用的 Windows 应用程序。</li><li>WPF（Windows Presentation Foundation）：.NET Framework 中用于开发 Windows 应用程序的 UI 框架，提供了一套矢量图形、动画、多媒体等功能，支持 XAML 标记语言，可以创建高度可定制的用户界面。</li><li>WinRT（Windows Runtime）：.NET Framework 中用于开发 Windows 应用程序的新型 API，支持多种编程语言，如 C++、C#、VB.NET 等，提供了一套现代化的开发体验和功能。</li></ol></blockquote><p>具体说说CLR、FCL、BCL、CIL、CLI</p><p>CLR</p><blockquote><p>CLR 负责将代码编译成中间语言（Intermediate Language，简称 IL），并在运行时将其转换为本机代码执行。</p><p>由于 CLR 提供了一个统一的执行环境，所以不同的 .NET 语言可以通过 CLR 进行交互和协作，比如 C#、VB.NET、F# 等。此外，CLR 还支持在托管代码[^什么是托管代码]中调用非托管代码，比如 C++ DLL 等，从而实现对现有代码的重用和集成。</p></blockquote><p>FCL、BCL</p><blockquote><p>BCL（Basic Class Library）是基类库，FCL（Framwork Class Library）是框架类库，严格来说BCL是FCL的子集，但有时候不加区别。</p></blockquote><p>CIL</p><blockquote><p>IL（Intermediate Language）和CIL（Common Intermediate Language）是同一个概念。IL或者CIL都是指.NET Framework中使用的中间语言，它是一种面向对象的、类型安全的、与平台无关的汇编语言，用于描述.NET Framework中的程序代码。</p><p>.NET Framework中的编译器将源代码编译为IL代码，并将其保存在扩展名为.dll（动态链接库）或.exe（可执行文件）的文件中。当.NET应用程序运行时，CLR将IL代码编译为本机代码，然后才能够执行。</p><p>在.NET Framework 1.x版本中，中间语言称为IL；而在.NET Framework 2.0版本之后，中间语言正式改名为CIL。因此，IL和CIL的本质是一样的，只是命名上的区别。</p><p>编译成CIL之后程序集中的可执行代码只会在需要的时候被JIT（just-in-time）编译器编译为本机代码[^什么是本机代码]</p></blockquote><p>CLI</p><blockquote><p>CLI是Common Language Infrastructure的缩写，中文名为公共语言基础设施。它是由国际标准化组织ISO和国际电工委员会IEC制定的，用于定义和实现跨平台、跨语言的程序集的一套规范和标准。</p><p>虽然不需要了解CLI的具体规范细节，但是至少应该熟悉公共类型系统和公共语言规范的含义和用途</p><p><a href="#CLI的具体介绍">CLI的具体介绍</a></p></blockquote><p>[^什么是托管代码]:托管代码是指在.NET Framework下运行的代码，它在运行时受到.NET Framework的管理和控制。在.NET Framework中，托管代码是由公共语言运行时（CLR）执行的，CLR提供了一系列服务，例如自动垃圾回收、代码安全性、异常处理等，以保证代码的运行环境安全和可靠。相对于非托管代码，托管代码更加安全，易于维护和管理。<br>[^什么是本机代码]:本机代码（Native code）是与特定硬件和操作系统平台相关的机器码指令，它是由CPU直接执行的，因此能够提供最高的性能和最好的可执行性。与IL代码相比，本机代码不需要CLR进行中间语言到本机代码的转换，因此运行速度更快。在.NET Framework中，当CLR将IL代码编译成本机代码后，它会被缓存，这样当程序下一次执行时，不需要再次将IL代码编译成本机代码，提高了应用程序的性能。</p><p><a name="CLI的具体介绍"></a></p><blockquote><p>1.公共类型系统</p><p>CTS（Common Type System），定义了那些在托管代码中一定会使用的类型的特征</p><ul><li>CTS定义了一组丰富的内置类型，以及每种类型独有的、固有的特性</li><li>.NET兼容编程语言提供的类型通常映射到CTS中已定义的内置类型集的某一个特殊子集</li><li>CTS的一个重要特征就是所有类型都继承自公共的基类——object</li><li>使用CTS可以确保系统类型和用户定义类型能够被任何.NET兼容的语言所使用</li></ul><p>2.公共语言规范</p><p>CLS（Common Lauguage Specification）详细地说明了一个.NET兼容编程语言的规则、属性和行为，其主题包括数据类型、类结构和参数传递</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> C#的学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C# </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>滑动窗口</title>
+      <link href="/2023/04/02/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/"/>
+      <url>/2023/04/02/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h1><blockquote><p>滑动窗口（sliding window）是一种算法技术，通常用于数组或字符串的问题中。滑动窗口算法通过维护一个窗口，该窗口在数组或字符串上移动，并在每次移动时更新窗口的内容，以便有效地解决一些问题。</p><p>具体来说，滑动窗口算法通常涉及三个指针：左指针，右指针和窗口指针。左指针指向当前窗口的左侧边界，右指针指向当前窗口的右侧边界，而窗口指针则用于移动窗口并更新答案。在每次移动窗口时，我们可以根据当前窗口的状态来更新答案，并在不改变窗口大小的情况下将窗口向右移动一位。</p><p>滑动窗口算法通常用于解决需要在一个连续子数组或子串中查找特定属性或计算某些统计数据的问题，例如求最小或最大值、求和、计数或检测满足特定条件的子数组或子串等。</p></blockquote><p>本文采用C#代码做解释</p><p>题目：</p><blockquote><p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p></blockquote><pre class=" language-c#"><code class="language-c#">public class Solution {    public int LengthOfLongestSubstring(string s) {    int n = s.Length;    HashSet<char> set = new HashSet<char>();    //这里使用哈希表而不是简单数组就是因为方便查找，时间复杂度为O(1)    int ans = 0, i = 0, j = 0;    while (i < n && j < n) {        if (!set.Contains(s[j])) {            set.Add(s[j++]);            ans = Math.Max(ans, j - i);        } else {            set.Remove(s[i++]);        }    }    return ans;}}/*HashSet<T> 是 C# 中的一个泛型集合类，用于存储不重复的元素。在这个例子中，HashSet<char> 就是一个存储不重复字符的集合。在代码中，我们使用 HashSet<char> 来判断字符是否出现过，以及在滑动窗口中添加或删除字符。HashSet<T> 类提供了许多有用的方法，如 Add、Remove、Contains 等等，用于添加、删除、判断元素是否存在等操作。当需要存储一些元素，且不希望出现重复元素时，可以使用 HashSet<T> 来实现。*/</code></pre><blockquote><p>注：</p><p>这里用了一个 HashSet 来存储当前滑动窗口中的字符。i 和 j 分别表示滑动窗口的左右边界，ans 表示当前最长不含重复字符子串的长度。在循环中，如果右边界所在的字符不在 HashSet 中，则将其添加到 HashSet 中，并将右边界右移一位。此时，由于新添加的字符不重复，因此更新 ans 的值。如果右边界所在的字符已经在 HashSet 中，说明当前窗口中有重复的字符，需要将左边界右移一位，并将左边界所在的字符从 HashSet 中移除，直到窗口中不再有重复的字符为止。</p><p>这种方法的时间复杂度为 O(n)，空间复杂度为 O(min(m, n))，其中 m 表示字符集的大小。</p></blockquote><p>今天就这，因为还有好多事做，太难啦~<span class="github-emoji"><span>😢</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😢</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😢</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p><p>雏雁有项目，电路要复习，作业还没做，饶了我吧<span class="github-emoji"><span>😫</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f62b.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构与算法 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>哈希表</title>
+      <link href="/2023/04/01/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
+      <url>/2023/04/01/%E5%93%88%E5%B8%8C%E8%A1%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="各种语言中的哈希表"><a href="#各种语言中的哈希表" class="headerlink" title="各种语言中的哈希表"></a>各种语言中的哈希表</h1><blockquote><ul><li><p>哈希表（Hash Table），也称为散列表，是一种数据结构，它可以将键（key）和值（value）之间建立一种映射关系。哈希表使用哈希函数将键转换为对应的数组索引，然后将值存储在该索引位置的数组元素中。哈希函数是一种将任意长度的输入转换为固定长度的输出的算法，可以将键映射到一个固定的位置，从而使得查找、插入和删除操作的时间复杂度可以达到O(1)。</p></li><li><p>哈希表通常是由一个固定大小的数组和一个哈希函数组成。数组的大小通常是根据哈希表需要存储的键值对的数量来确定的，而哈希函数的设计也需要考虑键的分布情况，以尽可能避免冲突，提高哈希表的性能。</p></li><li><p>哈希函数（Hash Function）是一种将任意大小的数据（如字符串、文件或整数）映射为固定大小的数据（通常是一个较短的固定长度的哈希值或哈希码）的函数。哈希函数的主要作用是将任意长度的数据映射为一个较短的固定长度的哈希值，从而方便进行数据存储和快速的数据查找。</p><p>哈希函数具有以下特点：</p><ol><li>输入数据相同，哈希值也应该相同；</li><li>哈希函数应该快速计算；</li><li>不同的输入数据可能会产生相同的哈希值，这种情况称为哈希冲突；</li><li>好的哈希函数应该尽可能地减少哈希冲突的概率，以提高哈希表的效率；</li><li>哈希函数应该满足均匀性，即输入数据的微小变化应该导致哈希值的大幅变化，从而减少哈希冲突的概率。</li></ol></li></ul></blockquote><h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><p>显而易见，Python中的哈希表就是字典</p><h3 id="C"><a href="#C" class="headerlink" title="C#"></a>C#</h3><blockquote><p>在C#中，哈希表可以使用<code>System.Collections</code>命名空间下的<code>Hashtable</code>类来实现。<code>Hashtable</code>类提供了一系列方法来对键值对进行添加、删除、查找等操作。</p></blockquote><h6 id="1-Hashtable实现"><a href="#1-Hashtable实现" class="headerlink" title="1.Hashtable实现"></a>1.<code>Hashtable</code>实现</h6><p>下面是一个使用C#中的<code>Hashtable</code>类来实现简单哈希表的示例代码：</p><pre class=" language-c#"><code class="language-c#">using System;using System.Collections;class Program {    static void Main(string[] args) {        // 创建一个Hashtable对象        Hashtable hash = new Hashtable();        // 向哈希表中添加键值对        hash.Add("key1", "value1");        hash.Add("key2", "value2");        hash.Add("key3", "value3");        // 通过键来查找值        Console.WriteLine("value of key1: " + hash["key1"]);        // 删除键值对        hash.Remove("key2");        // 遍历哈希表中的键值对        foreach (DictionaryEntry entry in hash) {            Console.WriteLine(entry.Key + ": " + entry.Value);        }    }}</code></pre><p>注：</p><blockquote><p><code>DictionaryEntry</code>结构体是在<code>System.Collections</code>命名空间下定义的。它是一个通用的键值对结构体，用于表示一个字典中的一个键值对</p></blockquote><h6 id="2-Dictionary-lt-TKey-TValue-gt-实现"><a href="#2-Dictionary-lt-TKey-TValue-gt-实现" class="headerlink" title="2.Dictionary<TKey, TValue>实现"></a>2.<code>Dictionary&lt;TKey, TValue&gt;</code>实现</h6><p>下面是一个使用<code>System.Collections.Generic</code>命名空间下的<code>Dictionary&lt;TKey, TValue&gt;</code>泛型类的例子：</p><pre class=" language-c#"><code class="language-c#">using System;using System.Collections.Generic;class Program{    static void Main()    {        // 创建一个Dictionary对象        var dict = new Dictionary<string, double>();        // 向Dictionary中添加一些键值对        dict.Add("apple", 1.99);        dict.Add("banana", 0.99);        dict.Add("orange", 1.49);        // 遍历Dictionary中的所有键值对        foreach (var entry in dict)        {            Console.WriteLine("Key: {0}, Value: {1}", entry.Key, entry.Value);        }    }}</code></pre><p>两者的比较：</p><blockquote><p><code>Dictionary&lt;string, double&gt;</code>和<code>Hashtable</code>都是C#中用于存储键值对的数据结构，它们的区别主要在于：</p><ol><li>类型安全：<code>Dictionary&lt;TKey, TValue&gt;</code>是一个泛型类，可以在编译时就指定键和值的具体类型，从而避免了类型转换错误；而<code>Hashtable</code>是一个非泛型的集合类，它存储的键和值都是<code>object</code>类型，需要在运行时进行类型转换，可能会导致性能损失和类型安全问题。</li><li>性能：由于<code>Dictionary&lt;TKey, TValue&gt;</code>是一个泛型类，它的内部实现可以针对具体的键和值类型进行优化，从而提高性能。而<code>Hashtable</code>是一个通用的集合类，它的内部实现相对比较通用，可能会存在一些性能上的损失。</li><li>功能：<code>Dictionary&lt;TKey, TValue&gt;</code>提供了一些<code>Hashtable</code>不具备的功能，例如<code>TryGetValue</code>方法可以在字典中查找指定键的值，而<code>Hashtable</code>需要使用<code>ContainsKey</code>和索引访问的方式进行查找。此外，<code>Dictionary&lt;TKey, TValue&gt;</code>还提供了一些LINQ相关的扩展方法，使得对字典的操作更加方便。</li></ol><p>因此，如果在C#中需要存储键值对，推荐使用<code>Dictionary&lt;TKey, TValue&gt;</code>来代替<code>Hashtable</code>，以获得更好的类型安全、性能和功能。</p></blockquote><h3 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h3><p>注：</p><blockquote><p>C++中的哈希表是由unordered_map类实现的，它使用了开链法（chaining）来处理冲突。C++11标准引入了新的哈希表实现方式，即unordered_map类和unordered_set类，它们使用了桶（bucket）来处理冲突，提高了哈希表的性能。</p></blockquote><h6 id="1-unordered-map类"><a href="#1-unordered-map类" class="headerlink" title="1.unordered_map类"></a>1.<code>unordered_map</code>类</h6><p>下面是一个使用C++标准库中的unordered_map类来实现简单哈希表的示例代码：</p><pre class=" language-c++"><code class="language-c++">#include <iostream>#include <unordered_map>int main() {    // 创建一个unordered_map对象    std::unordered_map<std::string, std::string> map;    // 向哈希表中添加键值对    map["key1"] = "value1";    map["key2"] = "value2";    map["key3"] = "value3";    // 通过键来查找值    std::cout << "value of key1: " << map["key1"] << std::endl;    // 删除键值对    map.erase("key2");    // 遍历哈希表中的键值对    for (const auto& kv : map) {        std::cout << kv.first << ": " << kv.second << std::endl;    }    return 0;}</code></pre><h6 id="2-unordered-map和unordered-set"><a href="#2-unordered-map和unordered-set" class="headerlink" title="2.unordered_map和unordered_set"></a>2.<code>unordered_map</code>和<code>unordered_set</code></h6><p>下面是使用<code>std::unordered_map</code>实现简单的单词计数器的示例代码：</p><pre class=" language-c++"><code class="language-c++">#include <iostream>#include <string>#include <unordered_map>int main(){    std::unordered_map<std::string, int> word_count;    // 读入一行文本    std::string line;    std::getline(std::cin, line);    // 将每个单词加入哈希表中    std::string word;    for (auto ch : line) {        if (std::isalpha(ch)) {            word.push_back(std::tolower(ch));        } else if (!word.empty()) {            ++word_count[word];            word.clear();        }    }    if (!word.empty()) {        ++word_count[word];    }    // 输出每个单词的出现次数    for (const auto& kv : word_count) {        std::cout << kv.first << ": " << kv.second << std::endl;    }    return 0;}//至于其中有一些没有见过的函数和方法以后再说，不想细挖了，越挖越深，越感觉到还有很多没学，没完没了了。。</code></pre><p><del>以后出一期关于C++中std命名空间中的函数、方法的汇总整理</del></p><p>有时间就出好吧。。</p><h6 id="拓展（std：：map和std-set"><a href="#拓展（std：：map和std-set" class="headerlink" title="拓展（std：：map和std::set)"></a>拓展（std：：map和std::set)</h6><blockquote><p><code>std::map</code>和<code>std::set</code>是C++ STL中的关联容器，它们使用红黑树实现。红黑树是一种自平衡二叉搜索树，可以保证在最坏情况下，每个操作的时间复杂度都是O(log n)。</p><p>与哈希表不同的是，<code>std::map</code>和<code>std::set</code>中的元素是按照键（或值）的顺序排列的，而不是按照哈希值的顺序排列的。这意味着，当需要对元素进行排序时，使用<code>std::map</code>和<code>std::set</code>会更加方便。</p><p><code>std::map</code>和<code>std::set</code>本身不是基于哈希表实现的，但是C++ STL中也提供了基于哈希表实现的关联容器<code>std::unordered_map</code>和<code>std::unordered_set</code>。这些容器使用哈希函数来映射键（或元素）到桶中，并使用链表或者红黑树来解决哈希冲突。因此，<code>std::unordered_map</code>和<code>std::unordered_set</code>可以看作是基于哈希表实现的<code>std::map</code>和<code>std::set</code>。</p></blockquote><p>又水了一天！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 水文 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数据结构打卡学习</title>
+      <link href="/2023/03/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%89%93%E5%8D%A1%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+      <url>/2023/03/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%89%93%E5%8D%A1%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h1 id="数据结构打卡学习（一）"><a href="#数据结构打卡学习（一）" class="headerlink" title="数据结构打卡学习（一）"></a>数据结构打卡学习（一）</h1><blockquote><p>本文采用C#语言</p></blockquote><p>第一题题目描述：</p><blockquote><p>给你一个整数数组 <code>nums</code> 。如果任一值在数组中出现 <strong>至少两次</strong> ，返回 <code>true</code> ；如果数组中每个元素互不相同，返回 <code>false</code> 。</p></blockquote><p>解答1:(使用Linq去重)</p><pre class=" language-c#"><code class="language-c#">public class Solution {    public bool ContainsDuplicate(int[] nums) {        int[] nums1=nums.Distinct().ToArray();        //这是Linq库中的Distinct()方法去除数组中的重复元素        if(nums1.Length==nums.Length) return false;        //如果长度一致就说明没有重复元素        else return true;    }}/*执行用时：172 ms, 在所有 C# 提交中击败了79.99%的用户内存消耗：50.9 MB, 在所有 C# 提交中击败了95.14%的用户*/</code></pre><p>注：</p><blockquote><p>LeetCode 会自动添加一些常用的命名空间，这些命名空间包括：</p><ul><li><code>System</code></li><li><code>System.Collections</code></li><li><code>System.Collections.Generic</code></li><li>==System.Linq==</li><li><code>System.Text</code></li><li><code>System.Threading.Tasks</code></li></ul><p>此外，还会自动添加一些 C# 中常用的类型的命名空间，例如：</p><ul><li><code>System.IO</code></li><li><code>System.Net</code></li><li><code>System.Xml</code></li><li><code>System.Diagnostics</code></li><li><code>System.Text.RegularExpressions</code></li><li><code>System.Globalization</code></li><li><code>System.ComponentModel</code></li><li><code>System.Reflection</code></li></ul><p>需要注意的是，这些命名空间并不一定适用于所有的 LeetCode 题目，具体需要根据题目要求和代码的实现情况来确定是否需要使用或添加其他命名空间。</p></blockquote><p>解答2：（使用HashSet去重）</p><pre class=" language-c#"><code class="language-c#">public class Solution {    public bool ContainsDuplicate(int[] nums) {        HashSet<int> hashset=new HashSet<int>(nums);        int[] result=hashset.ToArray();        if(result.Length==nums.Length) return false;        else return true;    }}/*执行用时：228 ms, 在所有 C# 提交中击败了27.52%的用户内存消耗：50.6 MB, 在所有 C# 提交中击败了97.57%的用户可以看出相对来说Linq更好*/</code></pre><p>注：</p><blockquote><p>1.HashSet可以在System.Collections.Generic命名空间中找到,</p><p>2.HashSet是一种集合类，它可以自动去除重复元素。您可以将数组转换为HashSet，然后再将其转换回数组</p></blockquote><p>解答3：（List遍历去重）</p><pre class=" language-c#"><code class="language-c#">public class Solution {    public bool ContainsDuplicate(int[] nums) {        List<int> list=new List<int>();        for(int i=0;i<nums.Length;i++){            if(!list.Contains(nums[i])){                list.Add(nums[i]);            }        }        int[] result=list.ToArray();        if(result.Length==nums.Length) return false;        else return true;    }}/*执行用时：1640 ms, 在所有 C# 提交中击败了15.97%的用户内存消耗：52.2 MB, 在所有 C# 提交中击败了33.70%的用户显然这样是最麻烦的*/</code></pre><p>第二题题目描述：</p><blockquote><p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p><p><strong>子数组</strong> 是数组中的一个连续部分。</p></blockquote><p>我的水平显然不足以应对这种题。。。下面是分析ChatGPT的解答与我自己的分析</p><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">//使用 Kadane 算法（时间复杂度O(n)）</span>public class Solution <span class="token punctuation">{</span>    public <span class="token keyword">int</span> <span class="token function">MaxSubArray</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">int</span> maxSum <span class="token operator">=</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>        <span class="token keyword">int</span> currentSum <span class="token operator">=</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>Length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>        currentSum <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">Max</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> currentSum <span class="token operator">+</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//通过遍历来做我是没有想到</span>        maxSum <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">Max</span><span class="token punctuation">(</span>maxSum<span class="token punctuation">,</span> currentSum<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//分开后就不知道每一部分的大小关系了，所以需要maxSum</span>        <span class="token punctuation">}</span>    <span class="token keyword">return</span> maxSum<span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token comment" spellcheck="true">/*执行用时：232 ms, 在所有 C# 提交中击败了5.54%的用户内存消耗：49.1 MB, 在所有 C# 提交中击败了24.24%的用户竟然还是这么low。。*/</span></code></pre><p>下面是官方进阶的分治法(时间复杂度<code>O(nlogn)</code>)：</p><pre class=" language-c#"><code class="language-c#">public int MaxSubArray(int[] nums) {    return DivideAndConquer(nums, 0, nums.Length - 1);}private int DivideAndConquer(int[] nums, int left, int right) {    if (left == right) {        return nums[left];    }    //数组中只有一个元素    int mid = left + (right - left) / 2;    int leftMaxSum = DivideAndConquer(nums, left, mid);    int rightMaxSum = DivideAndConquer(nums, mid + 1, right);    int crossMaxSum = CrossMaxSubArray(nums, left, right, mid);    return Math.Max(Math.Max(leftMaxSum, rightMaxSum), crossMaxSum);}private int CrossMaxSubArray(int[] nums, int left, int right, int mid) {    int leftSum = int.MinValue;    //为什么会是int.MinValue，后面会有注释说明    int sum = 0;    for (int i = mid; i >= left; i--) {        sum += nums[i];        leftSum = Math.Max(leftSum, sum);    }    int rightSum = int.MinValue;    sum = 0;    for (int i = mid + 1; i <= right; i++) {        sum += nums[i];        rightSum = Math.Max(rightSum, sum);    }    return leftSum + rightSum;}/*执行用时：180 ms, 在所有 C# 提交中击败了54.99%的用户内存消耗：49.2 MB, 在所有 C# 提交中击败了10.39%的用户都是些什么神仙。。。*/</code></pre><p>注：</p><blockquote><p>分治法常用于求解一些可以分成若干个相同的子问题的问题，例如排序、查找、最大子数组和等。</p><p>关于int.MinValue的注解：</p><p>在求解跨越中点的最大子数组问题时，初始的最大和需要设置为一个非常小的数，以保证后续的比较操作不会失效。</p><p>在上面的代码中，将 <code>leftSum</code> 的初始值设置为 <code>int.MinValue</code>，是为了保证 <code>leftSum</code> 在接下来的比较中能够被正确更新。如果将 <code>leftSum</code> 的初始值设置为 <code>0</code> 或其他正数，则可能会导致 <code>leftSum</code> 在接下来的比较中无法被正确更新。</p></blockquote>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>孤游的鬼魂（一）</title>
+      <link href="/2023/03/30/%E5%AD%A4%E6%B8%B8%E7%9A%84%E9%AC%BC%E9%AD%82%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+      <url>/2023/03/30/%E5%AD%A4%E6%B8%B8%E7%9A%84%E9%AC%BC%E9%AD%82%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h1 id="孤游的鬼魂"><a href="#孤游的鬼魂" class="headerlink" title="孤游的鬼魂"></a><strong>孤游的鬼魂</strong></h1><p>​    今日的风很大，还算晴朗，午后在咖啡店靠窗的位子坐着，我上下打量着过路的人们。像这样的观察似乎已经成为了我的习惯，有时是想以此来潜入社会，有时只是单纯的揣摩路人的个性以便汲取到什么灵感。</p><p>​    比如现在，不远处一个穿着深蓝色西装的男人正与一位白色长裙的齐肩短发女人交流着，男人刷得程亮的皮鞋不安地走动着，若隐若现的脸上很干净，尽管皱着眉头看上去也很是儒雅，那女人背对着我，一对凸现的蝴蝶骨有节奏地张翕着，仿佛下一秒就成了蝴蝶翅膀要飞走似的，应该是在向男人比划什么。</p><p>​    也许是什么东西的形状大小，也许她是听障者在比划手语，然而在这样两身行当中，那一头齐肩短发总让我出戏，它固定在那女人的头上，偶尔随风晃动。</p><p>​    “你不觉得我这头发很像七鳃鳗吗？”</p><p>​    “什么鳗？那又是什么？”</p><p>​    “一种寄生鱼，也是这样不长不短，寄生在大鱼身上，大鱼一动它也跟着动。你不觉得很像我的头发吗？它用吸盘一样的嘴吸住我光溜溜的脑袋，然后伪装成头发偷偷地吸走我的血，我的养分。”</p><p>​    “你这又是哪门子的幻想？”</p><p>​    “不像吗？那天我在你店里的杂志上看到图片的时候就被吓了一大跳，你说这世上怎么会有长得这么像我头发的生物……”</p><p>​    七鳃鳗吗？我想象着面前这个女人头顶着黑色的七鳃鳗在与西装男从容地交流，风一起，头上的七鳃鳗悉数随风飞舞起来，她便将飘起的七鳃鳗重新抚平成头发。</p><p>​    然而我越发觉得她的背影像是亭子——每次见了留这样发型的女生几乎都会让我想起她。</p><p>​     亭子是我大学毕业后认识的第一个女生，那时候我正在亲戚家开的小书店里工作，平时也会在前台给几家杂志写写诗赚稿费，工作之外几乎不与人交流，过着俗不可耐也毫无意义的生活。</p><p>​    </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 未风的文章集 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 孤游的鬼魂 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>打卡算法学习（一）</title>
+      <link href="/2023/03/30/%E6%89%93%E5%8D%A1%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+      <url>/2023/03/30/%E6%89%93%E5%8D%A1%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h1 id="算法学习之双指针（一）"><a href="#算法学习之双指针（一）" class="headerlink" title="算法学习之双指针（一）"></a>算法学习之双指针（一）</h1><blockquote><p>本文采用C#语言</p></blockquote><h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>1.第一题</p><blockquote><p>给你单链表的头结点 <code>head</code> ，请你找出并返回链表的中间结点。</p><p>如果有两个中间结点，则返回第二个中间结点。</p></blockquote><p>解答：（丑陋的代码，执行用时击败20.77%，内存消耗击败5.39%…<span class="github-emoji"><span>😢</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>)</p><pre class=" language-c#"><code class="language-c#">/** * Definition for singly-linked list. * public class ListNode { *     public int val; *     public ListNode next; *     public ListNode(int val=0, ListNode next=null) { *         this.val = val; *         this.next = next; *     } * } */public class Solution {    public ListNode MiddleNode(ListNode head) {         ListNode fast = head;         ListNode slow = head;        while(fast !=null && fast.next !=null){          fast=fast.next.next;          slow=slow.next;        }    return slow;    }    }</code></pre><p>采用双指针，走的快的fast到达end的时候slow处于middle</p><p>总体来说算比较easy</p><p>2.第二题</p><p>题目描述：</p><blockquote><p>给你一个链表，删除链表的倒数第 <code>n</code> 个结点，并且返回链表的头结点。</p></blockquote><p>解答：</p><pre class=" language-c#"><code class="language-c#">/** * Definition for singly-linked list. * public class ListNode { *     public int val; *     public ListNode next; *     public ListNode(int val=0, ListNode next=null) { *         this.val = val; *         this.next = next; *     } * } */public class Solution {    public ListNode RemoveNthFromEnd(ListNode head, int n) {    ListNode dummy = new ListNode(0); // 哑节点    dummy.next = head;    ListNode slow = dummy;    ListNode fast = dummy;    for (int i = 0; i < n; i++) {        fast = fast.next;    }    while (fast.next != null) {        slow = slow.next;        fast = fast.next;    }    slow.next = slow.next.next;    return dummy.next;}}</code></pre><p>答案是看的GPT的回答，太晚了今天有没有时间，明天把解析和分析过程给补上，不知不觉又是1点多了</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Markdown的使用</title>
+      <link href="/2023/03/29/Markdown%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+      <url>/2023/03/29/Markdown%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Markdown的使用"><a href="#Markdown的使用" class="headerlink" title="Markdown的使用"></a>Markdown的使用</h1><h2 id="1-标题"><a href="#1-标题" class="headerlink" title="1.标题"></a>1.标题</h2><p>就是6个标题种类，#越多标题越小</p><h2 id="2-引用"><a href="#2-引用" class="headerlink" title="2.引用"></a>2.引用</h2><p>用一个&gt;开头就行，比如：</p><blockquote><p>这是一段引用</p></blockquote><h2 id="3-无序列表"><a href="#3-无序列表" class="headerlink" title="3.无序列表"></a>3.无序列表</h2><p>前面加上-和空格就行，例如：</p><ul><li>这是一个无序列表</li></ul><p>或者用*加空格，比如：</p><ul><li>这是一个无序列表</li></ul><h2 id="4-任务列表"><a href="#4-任务列表" class="headerlink" title="4.任务列表"></a>4.任务列表</h2><p>就是- [ ] ，注意这里有三个空格</p><ul><li><input disabled="" type="checkbox"> 这是一个任务列表</li></ul><h2 id="5-代码块"><a href="#5-代码块" class="headerlink" title="5.代码块"></a>5.代码块</h2><p>三个反引号~~~加上语言种类，例如：</p><pre class=" language-c#"><code class="language-c#">using System;class WH{    public static void Main()    {        Console.WriteLine("WHNB!")    }}</code></pre><h2 id="6-数学公式"><a href="#6-数学公式" class="headerlink" title="6.数学公式"></a>6.数学公式</h2><p> 四个$符号，$$   $$其中加上想要加上的内容，(直接打上两个$然后回车好像也行），用LaTex，例如：<br>$$<br>\frac{\partial f}{\partial x}=2\sqrt{a}x<br>$$</p><h2 id="7-表格"><a href="#7-表格" class="headerlink" title="7.表格"></a>7.表格</h2><p>用|隔开，像这样：“|姓名|年龄|成绩|”</p><p>还可以左对齐右对齐：就是在下一行写“|：—|：—：|—：|“</p><p>短横线至少有一个，当然也可以直接生成表格后调整</p><blockquote><table><thead><tr><th>姓名</th><th>年龄</th><th>成绩</th></tr></thead><tbody><tr><td></td><td></td><td></td></tr></tbody></table></blockquote><h2 id="8-脚注"><a href="#8-脚注" class="headerlink" title="8.脚注"></a>8.脚注</h2><p>就是加上**[^文本内容]**</p><p>这是一个脚注<a href="%E8%84%9A%E6%B3%A8%E4%BC%9A%E8%B7%B3%E8%BD%AC%E5%88%B0%E8%BF%99%E9%87%8C">^脚注真</a></p><h2 id="9-横线"><a href="#9-横线" class="headerlink" title="9.横线"></a>9.横线</h2><p>三根—，例如：</p><hr><h2 id="10-链接"><a href="#10-链接" class="headerlink" title="10.链接"></a>10.链接</h2><p>[百度](baidu.com “这是百度”)</p><p><a href="baidu.com" title="这是百度">百度</a></p><h2 id="11-引用链接"><a href="#11-引用链接" class="headerlink" title="11.引用链接"></a>11.引用链接</h2><p>\[百度][id]</p><p>[id]:google.com “一个搜索引擎”</p><p>这样就可以多次引用</p><p>链接到标题等内容：</p><p>跳转到第一个标题：<a href="#Markdown%E7%9A%84%E4%BD%BF%E7%94%A8">标题</a></p><h2 id="12-URL"><a href="#12-URL" class="headerlink" title="12.URL"></a>12.URL</h2><p><a href="http://www.baidu.com/">http://www.baidu.com</a></p><p>图片：（可以使用本地url）</p><p><img src="https://whnb.nuoxnuo.eu.org/%E6%88%91%E7%9A%84QQ%E5%A4%B4%E5%83%8F.jpg" alt="百度" title="百度的图片（要用英文引号）"></p><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="斜体"><a href="#斜体" class="headerlink" title="斜体"></a>斜体</h3><p>一对星号</p><h3 id="加粗"><a href="#加粗" class="headerlink" title="加粗"></a>加粗</h3><p>两对星号</p><h3 id="行内代码"><a href="#行内代码" class="headerlink" title="行内代码"></a>行内代码</h3><p>一对反引号</p><h3 id="下划线"><a href="#下划线" class="headerlink" title="下划线"></a>下划线</h3><p><u>标签，类似于html，这里省去了后半部分</u></p><u><h3 id="表情符号"><a href="#表情符号" class="headerlink" title="表情符号"></a>表情符号</h3><p><span class="github-emoji"><span>😄</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p><p>：smile：中文冒号不行，所以这里没有被转义</p><p><a href="https://unicode.org/emoji/charts/full-emoji-list.html">emoji的通用表情代码在这</a></p><h3 id="行内数学公式"><a href="#行内数学公式" class="headerlink" title="行内数学公式"></a>行内数学公式</h3><p>一对$包裹</p><h3 id="下标"><a href="#下标" class="headerlink" title="下标"></a>下标</h3><p>一对html的<sub>括起来</sub></p><p>上标就是sub变sup（html）</p><p>H<sub>2</sub>O </p><h3 id="高亮"><a href="#高亮" class="headerlink" title="高亮"></a>高亮</h3><p>两对等号包裹？不知道按视频教程为什么不行，编辑器不同吧</p><h3 id="嵌入视频等"><a href="#嵌入视频等" class="headerlink" title="嵌入视频等"></a>嵌入视频等</h3><iframe src="//player.bilibili.com/player.html?aid=327623069&amp;bvid=BV1JA411h7Gw&amp;cid=171385214&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe></u>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2023/03/25/hello-world/"/>
+      <url>/2023/03/25/hello-world/</url>
+      
+        <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="我生日都不记得你别看了" data-whm="抱歉，这个文章不能被纠正，不过您还是能看看解密后的内容">  <script id="hbeData" type="hbeData" data-hmacdigest="e21aaa26f87918a5cc1fb60edb060b1a6aa258b235c21822d08b7236a5a42ec9">c9f749e99ba15766e67dcd5eea2d56e9f43fa5d88890fd516293b8bb2ad0987908fc9e7be288e037f8612bc36cee8bc8364d2f19f224a5c90d159e994b2577b5f0245c5ac0c1ab7e1c747aa62c7eff7ab80b3ba03b9a18ab786f7f25e8aa8a66f9be4a75e1756974a069676046132d6a109c7ac4eed6656d040304db7e6356b67956e328c86c78d145ec6560b3fd421e292943068947d4ecc3865d7b0c8b5d6e4b4754695f5098f6e9d29c4cd2f587f19596df884677c0afd5de3e7dd9a96b776a048ac5a585a6809973fe45a21baabc87d3d230a66f0e4b417215ccc36a04fd88707d90470cdcb7bf1a0ceeec7d91abdfedcb6a1664282224dfb20961ed34278ba389fd42e59dc9638198149dd1f9518265cc9d208f2e93fd2d1aeae14ff67b3627c44ee3999dc083d657132b89a94682e30e47f404f625717dab43c98c87480b8ecadb5416af1fe286263aa256760fdc7674cc0d91f33bcd0e343454387b76b4bf40e69c62e2b2943ccd40f948f079e3cb97ed7555ce870b7ffb58845e185d04c2bd904efcf85ef1f18b968746fa5884856e0e89a0448caa4a7aeea1c6d4f823f7f21c358a435381de9890d9a5f58bb35452170a071845a4b9634f8a1af43afb7de646b7bf5116c93e11757fc55b6d9ef71ccdcae9d4cc57fac43e5dee84fc045267ba4e9e3690a62a10c3d289709c8d72e9ba021d4e9f5d5f9c0509c6fa2a8663515781f00699d6b95767da48b218f8c0ba99da5c7caff7b5360220f9745a9bdf2f70c8da86c8f83a819d2ff6bee245ea17c2375ea98441aeda645bad3770e3357671c659ad2c386f1c965dea107cac14ace2b79c454ef3985705f8bb65d40ec322296da7403aee408af8e7a073eee6c2bd565c6fdd336ee7d15c3b55f98cb16bc28f942c1be9a0680750a9aaf949eaf6aed3c80dba351c30d23c3f849562036347a3296183b34bcd647323133db04992691dfd99de3de9986c7f32210f9afd544e6f601efae8fa91a4595b4aedcda6aeb81447fd805b777cc5541cd858e7a20495a7cd5ae338cbcffdeddec5ca01ffeae19d93ccb9fdd484dae8a44886b2ce3e36c5fb746f77a358b25bc4fec85c134092e0a2d8721558b3a544e1e264966759bd2d27996208b5690187f78abb56f52f5798f7aa48e417e2fa5a2a752ce3af95720c32108f909572837aa3cba9f6bb42b26d7119c73c6fd408e470aa78fd1e26e8ebc7daae685b61cd49ffd6f61af393db1f7fb149594bee77cfe0cba7dfa02d5b7e59e6a15b49360def13c2d5ad6d36c943fabab07b8022f5373097ec91ee91d24b68161c9c8686cfa906597a3087a92d2f0d95b76490a789e80c2b3437bb039e82cbe95df0a66f32aaae9250bae88f8a8394f68570d3e7b28df26a3047df02b2fc2f7f35b87e9505d8414d978b58660f1e9a2894187c5d0a968f58d06bd5cf553d89c2bcf44601ad4e5c37c1209421c75d5a8cc0539dad0dd9dd40897171aae7f52197f84bdbc9f9b48f988df4aaf4a282374c18eece42a68e3fb2132a3d11aa522ac58b81160933170bda2eddf4bcc0303eb64bcd4ef628f19293d228f16f4fe3404a01f8bb81436e86eb8e7c451d69cfbfc4b722e8e013e82056e77a8ef740e957dc74b1bd98f7c4317cebc580dbfbc6f926a53ba5d6e4916bacd76368d5c5955a9636aa2e7c2743240605af6d61d442fde13780102a3e5f7fb49822d76f369e99e9b02d5f387d4d32a96989124f9d2542318627314744304bc3386718f515744b42633cd5040e859df88a71bd566749edcc7e0caf6473e8d6418c4dce1afe3911adbd0a4d9173017357869b36f755973c57f3a7f0c803ad9bc7ead238b1ca1b89417428747530161ef0b4c322a453e9d340a629d17f1ab7f835d2e952b5142e6e5d50d869f5a7aa52a444cdf17cf75fea094062971511786b291219082496b431fbd34ddbb34de59b69b25f71ad3e844a8c1078b450a92115618ab2534fc6d643fdeb9b02894867c67af7f20eab1a008eb0d1c714bfc0778aabc36ea81711c03ecddcaa1a30e93709bde1fc7f9487cd2dfe67424b0e57d75b94edb6113ee8009cd724a66f408e702f534fbf5b079f6765ed6adb9f17f9dc3dcacf869e296599ac987a6bd95fed23f4f53572a795e2c3d5e6c8aa0790b2a391158a2008cd67a424e4b2bd2cff19dbe504bb0ced836d14953f763df0561006685890ea800177780806d1f391486b3fe28390fc86ca346c42c62d51c2e91bcef425816c51a56c4cb13ff98b2c45eeae3b1ec6decc2403ca2102609911c0d3ef1801ffdf230a9188aa51700a8435164a6bed89cd20ab5611de284219118ca06fb6ff93c0232a08a65541a3ad16b374ec302a6cc3510dace35b5c2cd064b0967ed1283473fdc9cbcbcd755dea654426204902e486a112cef7ca5f6eb5c2354c3504ea1d05</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-default">      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-default">我的生日？（4位），输入的时候先输入一个"_"再输入4位数字，不要问我为什么</span>      </label>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
