@@ -13,21 +13,22 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://geekhaozai.github.io/2023/04/01/哈希表/"/>
+    <link rel="canonical" href="https://geekhaozai.github.io/2023/10/18/拒绝心理内耗（一）/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="各种语言中的哈希表  哈希表（Hash Table），也称为散列表，是一种数据结构，它可以将键（key）和值（value）之间建立一种映射关系。哈希表使用哈希函数将键转换为对应的数组索引，然后将值存储在该索引位置的数组元素中。哈希函数是一种将任意长度的输入转换为固定长度的输出的算法，可以将键映射到一个固定的位置，从而使得查找、插入和删除操作的时间复杂度可以达到O(1)。  哈希表通常是由一个固定大">
+        <meta name="description" content="开篇​		写在前面的话： ​		为什么我要写这样一个专栏？我无数次尝试过让自己不要焦虑不要受自己的情绪影响，但是自己做不到，情绪失控的时候很难受，感觉不到快乐。但是，我相信，只要每天坚持改善一点点，我就是在朝着想要的生活迈进，学习他人的经验是必须的，这也是我为什么一直以来从未让这种局面改善——单打独斗、缺少指引和帮助。 ​		我要怎么写？第一点就是不要施加给自己压力，重在坚持，能够坚持下去就是最大">
 <meta property="og:type" content="article">
-<meta property="og:title" content="哈希表">
-<meta property="og:url" content="https://geekhaozai.github.io/2023/04/01/%E5%93%88%E5%B8%8C%E8%A1%A8/index.html">
+<meta property="og:title" content="拒绝精神内耗，享受你的人生（一）">
+<meta property="og:url" content="https://geekhaozai.github.io/2023/10/18/%E6%8B%92%E7%BB%9D%E5%BF%83%E7%90%86%E5%86%85%E8%80%97%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
 <meta property="og:site_name" content="Haozai--Ordinary Life">
-<meta property="og:description" content="各种语言中的哈希表  哈希表（Hash Table），也称为散列表，是一种数据结构，它可以将键（key）和值（value）之间建立一种映射关系。哈希表使用哈希函数将键转换为对应的数组索引，然后将值存储在该索引位置的数组元素中。哈希函数是一种将任意长度的输入转换为固定长度的输出的算法，可以将键映射到一个固定的位置，从而使得查找、插入和删除操作的时间复杂度可以达到O(1)。  哈希表通常是由一个固定大">
+<meta property="og:description" content="开篇​		写在前面的话： ​		为什么我要写这样一个专栏？我无数次尝试过让自己不要焦虑不要受自己的情绪影响，但是自己做不到，情绪失控的时候很难受，感觉不到快乐。但是，我相信，只要每天坚持改善一点点，我就是在朝着想要的生活迈进，学习他人的经验是必须的，这也是我为什么一直以来从未让这种局面改善——单打独斗、缺少指引和帮助。 ​		我要怎么写？第一点就是不要施加给自己压力，重在坚持，能够坚持下去就是最大">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-01T11:40:59.555Z">
-<meta property="article:modified_time" content="2023-04-01T13:51:24.076Z">
+<meta property="article:published_time" content="2023-10-18T14:59:27.250Z">
+<meta property="article:modified_time" content="2023-10-18T15:56:44.904Z">
 <meta property="article:author" content="Haozai">
+<meta property="article:tag" content="成长">
 <meta name="twitter:card" content="summary">
     
     
@@ -40,7 +41,7 @@
     
     <title>
         
-            哈希表 -
+            拒绝精神内耗，享受你的人生（一） -
         
         Haozai——Ordinary Life
     </title>
@@ -347,7 +348,7 @@
 
         <div class="article-title">
             
-                <h1 class="article-title-regular">哈希表</h1>
+                <h1 class="article-title-regular">拒绝精神内耗，享受你的人生（一）</h1>
             
             </div>
             
@@ -360,7 +361,7 @@
                 </div>
                 <div class="info flex flex-col justify-between">
                     <div class="author flex items-center">
-                        <span class="name text-default-text-color text-lg font-semibold">GeekHaozai</span>
+                        <span class="name text-default-text-color text-lg font-semibold">Haozai(焦虑孤独版)</span>
                         
                             <span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv3</span>
                         
@@ -369,15 +370,15 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-04-01 19:40:59</span>
-        <span class="mobile">2023-04-01 19:40:59</span>
+        <span class="desktop">2023-10-18 22:59:27</span>
+        <span class="mobile">2023-10-18 22:59:27</span>
         <span class="hover-info">创建</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-04-01 21:51:24</span>
-            <span class="mobile">2023-04-01 21:51:24</span>
+            <span class="desktop">2023-10-18 23:56:44</span>
+            <span class="mobile">2023-10-18 23:56:44</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -391,7 +392,7 @@
                     
                         
                         <li>
-                            <a href="/categories/%E6%B0%B4%E6%96%87/">水文</a>&nbsp;
+                            <a href="/categories/%E5%BF%83%E7%90%86/">心理</a>&nbsp;
                         </li>
                     
                     
@@ -399,6 +400,17 @@
             </ul>
         </span>
     
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%88%90%E9%95%BF/">成长</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
     
 
     
@@ -420,168 +432,13 @@
 
 
         <div class="article-content markdown-body">
-            <h1 id="各种语言中的哈希表"><a href="#各种语言中的哈希表" class="headerlink" title="各种语言中的哈希表"></a>各种语言中的哈希表</h1><blockquote>
-<ul>
-<li><p>哈希表（Hash Table），也称为散列表，是一种数据结构，它可以将键（key）和值（value）之间建立一种映射关系。哈希表使用哈希函数将键转换为对应的数组索引，然后将值存储在该索引位置的数组元素中。哈希函数是一种将任意长度的输入转换为固定长度的输出的算法，可以将键映射到一个固定的位置，从而使得查找、插入和删除操作的时间复杂度可以达到O(1)。</p>
-</li>
-<li><p>哈希表通常是由一个固定大小的数组和一个哈希函数组成。数组的大小通常是根据哈希表需要存储的键值对的数量来确定的，而哈希函数的设计也需要考虑键的分布情况，以尽可能避免冲突，提高哈希表的性能。</p>
-</li>
-<li><p>哈希函数（Hash Function）是一种将任意大小的数据（如字符串、文件或整数）映射为固定大小的数据（通常是一个较短的固定长度的哈希值或哈希码）的函数。哈希函数的主要作用是将任意长度的数据映射为一个较短的固定长度的哈希值，从而方便进行数据存储和快速的数据查找。</p>
-<p>哈希函数具有以下特点：</p>
-<ol>
-<li>输入数据相同，哈希值也应该相同；</li>
-<li>哈希函数应该快速计算；</li>
-<li>不同的输入数据可能会产生相同的哈希值，这种情况称为哈希冲突；</li>
-<li>好的哈希函数应该尽可能地减少哈希冲突的概率，以提高哈希表的效率；</li>
-<li>哈希函数应该满足均匀性，即输入数据的微小变化应该导致哈希值的大幅变化，从而减少哈希冲突的概率。</li>
-</ol>
-</li>
-</ul>
-</blockquote>
-<h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><p>显而易见，Python中的哈希表就是字典</p>
-<h3 id="C"><a href="#C" class="headerlink" title="C#"></a>C#</h3><blockquote>
-<p>在C#中，哈希表可以使用<code>System.Collections</code>命名空间下的<code>Hashtable</code>类来实现。<code>Hashtable</code>类提供了一系列方法来对键值对进行添加、删除、查找等操作。</p>
-</blockquote>
-<h6 id="1-Hashtable实现"><a href="#1-Hashtable实现" class="headerlink" title="1.Hashtable实现"></a>1.<code>Hashtable</code>实现</h6><p>下面是一个使用C#中的<code>Hashtable</code>类来实现简单哈希表的示例代码：</p>
-<pre class=" language-c#"><code class="language-c#">using System;
-using System.Collections;
-
-class Program {
-    static void Main(string[] args) {
-        // 创建一个Hashtable对象
-        Hashtable hash = new Hashtable();
-
-        // 向哈希表中添加键值对
-        hash.Add("key1", "value1");
-        hash.Add("key2", "value2");
-        hash.Add("key3", "value3");
-
-        // 通过键来查找值
-        Console.WriteLine("value of key1: " + hash["key1"]);
-
-        // 删除键值对
-        hash.Remove("key2");
-
-        // 遍历哈希表中的键值对
-        foreach (DictionaryEntry entry in hash) {
-            Console.WriteLine(entry.Key + ": " + entry.Value);
-        }
-    }
-}
-</code></pre>
-<p>注：</p>
-<blockquote>
-<p><code>DictionaryEntry</code>结构体是在<code>System.Collections</code>命名空间下定义的。它是一个通用的键值对结构体，用于表示一个字典中的一个键值对</p>
-</blockquote>
-<h6 id="2-Dictionary-lt-TKey-TValue-gt-实现"><a href="#2-Dictionary-lt-TKey-TValue-gt-实现" class="headerlink" title="2.Dictionary<TKey, TValue>实现"></a>2.<code>Dictionary&lt;TKey, TValue&gt;</code>实现</h6><p>下面是一个使用<code>System.Collections.Generic</code>命名空间下的<code>Dictionary&lt;TKey, TValue&gt;</code>泛型类的例子：</p>
-<pre class=" language-c#"><code class="language-c#">using System;
-using System.Collections.Generic;
-
-class Program
-{
-    static void Main()
-    {
-        // 创建一个Dictionary对象
-        var dict = new Dictionary<string, double>();
-
-        // 向Dictionary中添加一些键值对
-        dict.Add("apple", 1.99);
-        dict.Add("banana", 0.99);
-        dict.Add("orange", 1.49);
-
-        // 遍历Dictionary中的所有键值对
-        foreach (var entry in dict)
-        {
-            Console.WriteLine("Key: {0}, Value: {1}", entry.Key, entry.Value);
-        }
-    }
-}
-</code></pre>
-<p>两者的比较：</p>
-<blockquote>
-<p><code>Dictionary&lt;string, double&gt;</code>和<code>Hashtable</code>都是C#中用于存储键值对的数据结构，它们的区别主要在于：</p>
-<ol>
-<li>类型安全：<code>Dictionary&lt;TKey, TValue&gt;</code>是一个泛型类，可以在编译时就指定键和值的具体类型，从而避免了类型转换错误；而<code>Hashtable</code>是一个非泛型的集合类，它存储的键和值都是<code>object</code>类型，需要在运行时进行类型转换，可能会导致性能损失和类型安全问题。</li>
-<li>性能：由于<code>Dictionary&lt;TKey, TValue&gt;</code>是一个泛型类，它的内部实现可以针对具体的键和值类型进行优化，从而提高性能。而<code>Hashtable</code>是一个通用的集合类，它的内部实现相对比较通用，可能会存在一些性能上的损失。</li>
-<li>功能：<code>Dictionary&lt;TKey, TValue&gt;</code>提供了一些<code>Hashtable</code>不具备的功能，例如<code>TryGetValue</code>方法可以在字典中查找指定键的值，而<code>Hashtable</code>需要使用<code>ContainsKey</code>和索引访问的方式进行查找。此外，<code>Dictionary&lt;TKey, TValue&gt;</code>还提供了一些LINQ相关的扩展方法，使得对字典的操作更加方便。</li>
-</ol>
-<p>因此，如果在C#中需要存储键值对，推荐使用<code>Dictionary&lt;TKey, TValue&gt;</code>来代替<code>Hashtable</code>，以获得更好的类型安全、性能和功能。</p>
-</blockquote>
-<h3 id="C-1"><a href="#C-1" class="headerlink" title="C++"></a>C++</h3><p>注：</p>
-<blockquote>
-<p>C++中的哈希表是由unordered_map类实现的，它使用了开链法（chaining）来处理冲突。C++11标准引入了新的哈希表实现方式，即unordered_map类和unordered_set类，它们使用了桶（bucket）来处理冲突，提高了哈希表的性能。</p>
-</blockquote>
-<h6 id="1-unordered-map类"><a href="#1-unordered-map类" class="headerlink" title="1.unordered_map类"></a>1.<code>unordered_map</code>类</h6><p>下面是一个使用C++标准库中的unordered_map类来实现简单哈希表的示例代码：</p>
-<pre class=" language-c++"><code class="language-c++">#include <iostream>
-#include <unordered_map>
-
-int main() {
-    // 创建一个unordered_map对象
-    std::unordered_map<std::string, std::string> map;
-
-    // 向哈希表中添加键值对
-    map["key1"] = "value1";
-    map["key2"] = "value2";
-    map["key3"] = "value3";
-
-    // 通过键来查找值
-    std::cout << "value of key1: " << map["key1"] << std::endl;
-
-    // 删除键值对
-    map.erase("key2");
-
-    // 遍历哈希表中的键值对
-    for (const auto& kv : map) {
-        std::cout << kv.first << ": " << kv.second << std::endl;
-    }
-
-    return 0;
-}
-</code></pre>
-<h6 id="2-unordered-map和unordered-set"><a href="#2-unordered-map和unordered-set" class="headerlink" title="2.unordered_map和unordered_set"></a>2.<code>unordered_map</code>和<code>unordered_set</code></h6><p>下面是使用<code>std::unordered_map</code>实现简单的单词计数器的示例代码：</p>
-<pre class=" language-c++"><code class="language-c++">#include <iostream>
-#include <string>
-#include <unordered_map>
-
-int main()
-{
-    std::unordered_map<std::string, int> word_count;
-
-    // 读入一行文本
-    std::string line;
-    std::getline(std::cin, line);
-
-    // 将每个单词加入哈希表中
-    std::string word;
-    for (auto ch : line) {
-        if (std::isalpha(ch)) {
-            word.push_back(std::tolower(ch));
-        } else if (!word.empty()) {
-            ++word_count[word];
-            word.clear();
-        }
-    }
-    if (!word.empty()) {
-        ++word_count[word];
-    }
-
-    // 输出每个单词的出现次数
-    for (const auto& kv : word_count) {
-        std::cout << kv.first << ": " << kv.second << std::endl;
-    }
-
-    return 0;
-}
-//至于其中有一些没有见过的函数和方法以后再说，不想细挖了，越挖越深，越感觉到还有很多没学，没完没了了。。
-</code></pre>
-<p><del>以后出一期关于C++中std命名空间中的函数、方法的汇总整理</del></p>
-<p>有时间就出好吧。。</p>
-<h6 id="拓展（std：：map和std-set"><a href="#拓展（std：：map和std-set" class="headerlink" title="拓展（std：：map和std::set)"></a>拓展（std：：map和std::set)</h6><blockquote>
-<p><code>std::map</code>和<code>std::set</code>是C++ STL中的关联容器，它们使用红黑树实现。红黑树是一种自平衡二叉搜索树，可以保证在最坏情况下，每个操作的时间复杂度都是O(log n)。</p>
-<p>与哈希表不同的是，<code>std::map</code>和<code>std::set</code>中的元素是按照键（或值）的顺序排列的，而不是按照哈希值的顺序排列的。这意味着，当需要对元素进行排序时，使用<code>std::map</code>和<code>std::set</code>会更加方便。</p>
-<p><code>std::map</code>和<code>std::set</code>本身不是基于哈希表实现的，但是C++ STL中也提供了基于哈希表实现的关联容器<code>std::unordered_map</code>和<code>std::unordered_set</code>。这些容器使用哈希函数来映射键（或元素）到桶中，并使用链表或者红黑树来解决哈希冲突。因此，<code>std::unordered_map</code>和<code>std::unordered_set</code>可以看作是基于哈希表实现的<code>std::map</code>和<code>std::set</code>。</p>
-</blockquote>
-<p>又水了一天！</p>
+            <h1 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h1><p>​		<strong>写在前面的话</strong>：</p>
+<p>​		为什么我要写这样一个专栏？我无数次尝试过让自己不要焦虑不要受自己的情绪影响，但是自己做不到，情绪失控的时候很难受，感觉不到快乐。但是，我相信，只要每天坚持改善一点点，我就是在朝着想要的生活迈进，学习他人的经验是必须的，这也是我为什么一直以来从未让这种局面改善——单打独斗、缺少指引和帮助。</p>
+<p>​		我要怎么写？第一点就是不要施加给自己压力，重在坚持，能够坚持下去就是最大的胜利。写些什么？可以写写当天学到的一些心理学…关于人生的道理，也可以写写自己的不足，至于怎么做那是的确困难的，坏习惯不可能一天就能改掉。重在学习别人是怎么处理自己的人生的，别人的人生态度是怎么样的，当你看过各式各样的人生之后，或许你也能找到你自己的意义了。</p>
+<hr>
+<p>​		之后我会打开博客的评论系统，用QQ登录即可评论（开发功能还在审核中）。如果你有相同的感触或者你也想给我一句人生至理，也欢迎你给我留言。</p>
+<p>​		当然说空话没有什么用处，重点是领悟-&gt;付诸实践。今天收获的最大的一句话就是：假如你没有动力，这是正常的，不妨在你不熟悉的领域去闯一闯，也许你最终还是会回到自己的舒适区，但是人生到这也是一个新的成长阶段。所以有什么好焦虑的呢，原来也不只有我一个人是这样的，我对学习抬不起兴趣的时候有没有想过出去玩一玩呢？为什么非得是坐在电脑前刷一些唾手可得的快乐呢。多尝试一些新奇的，还记得长郡的那本小书吗？里面有个佬不就是高考前破防出去放松玩了一周，回来反而稳定发挥吗？</p>
+<p>​		你的动力真的是动力吗？还是说是虚假的动力？有没有杂质混到了你的目标里，你的目标变成了虚假的目标，一旦你觉得努力没有意义，动力就会突然消失。</p>
 
         </div>
 
@@ -589,18 +446,18 @@ int main()
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li><strong>标题:</strong> 哈希表</li>
-        <li><strong>作者:</strong> GeekHaozai</li>
+        <li><strong>标题:</strong> 拒绝精神内耗，享受你的人生（一）</li>
+        <li><strong>作者:</strong> Haozai(焦虑孤独版)</li>
         <li><strong>创建于
-                :</strong> 2023-04-01 19:40:59</li>
+                :</strong> 2023-10-18 22:59:27</li>
         
             <li>
                 <strong>更新于
-                    :</strong> 2023-04-01 21:51:24
+                    :</strong> 2023-10-18 23:56:44
             </li>
         
         <li>
-            <strong>链接:</strong> https://geekhaozai.github.io/2023/04/01/哈希表/
+            <strong>链接:</strong> https://geekhaozai.github.io/2023/10/18/拒绝心理内耗（一）/
         </li>
         <li>
             <strong>
@@ -618,35 +475,28 @@ int main()
         
 
         
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%88%90%E9%95%BF/">#成长</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
         
 
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                        rel="prev"
-                        href="/2023/04/02/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/"
-                        >
-                            <span class="left arrow-icon flex justify-center items-center">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">滑动窗口</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                         rel="next"
-                        href="/2023/03/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%89%93%E5%8D%A1%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/"
+                        href="/2023/04/26/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"
                         >
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">数据结构打卡学习</span>
+                                <span class="post-nav-title-item">正则表达式</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex justify-center items-center">
@@ -711,8 +561,8 @@ int main()
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">哈希表</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%84%E7%A7%8D%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="nav-text">各种语言中的哈希表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python"><span class="nav-text">Python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C"><span class="nav-text">C#</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-1"><span class="nav-text">C++</span></a></li></ol></li></ol></li></ol>
+        <div class="page-title">拒绝精神内耗，享受你的人生（一）</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E7%AF%87"><span class="nav-text">开篇</span></a></li></ol>
 
     </div>
 </div>
